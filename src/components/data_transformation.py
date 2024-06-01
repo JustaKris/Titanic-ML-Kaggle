@@ -107,6 +107,11 @@ class DataTransformation:
             train_df = self._apply_feature_engineering(train_df)
             test_df = self._apply_feature_engineering(test_df)
 
+            # Saving mode values of each column for later use
+            train_df.to_csv(os.path.join('artifacts', 'train_augmented.csv'), index=False, header=True)
+            test_df.to_csv(os.path.join('artifacts', 'test_augmented.csv'), index=False, header=True)
+            # train_df.mode().to_csv(os.path.join('artifacts', 'train_mode.csv'), index=False, header=True)  # Saving mode of train data for future use
+
             numerical_columns = ["Age", "SibSp", "Parch", "norm_fare", "cabin_multiple", "numeric_ticket"]
             categorical_columns = ["Pclass", "Sex", "Embarked", "cabin_adv", "name_title"]
 

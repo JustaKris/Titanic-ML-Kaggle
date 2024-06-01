@@ -12,8 +12,8 @@ class DataIngestionConfig:
     raw_train_data_path: str = os.path.join('notebook', 'data', 'train.csv')
     raw_test_data_path: str = os.path.join('notebook', 'data', 'test.csv')
     # Export paths for safekeeping
-    processed_train_data_path: str = os.path.join('artifacts', 'train_processed.csv')
-    processed_test_data_path: str = os.path.join('artifacts', 'test_processed.csv')
+    processed_train_data_path: str = os.path.join('artifacts', 'train.csv')
+    processed_test_data_path: str = os.path.join('artifacts', 'test.csv')
 
 class DataIngestion:
     def __init__(self, raw_train_data_path: str = None, raw_test_data_path: str = None):
