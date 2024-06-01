@@ -39,7 +39,8 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/JustaKris/MLProject/tree/Titanic-Survival-Predictor-App',
     packages=find_packages(),
-    install_requires=get_requirements('requirements.txt'),
+    # install_requires=get_requirements('requirements.txt'),
+    install_requirements=get_requirements('requirements.txt'),
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
