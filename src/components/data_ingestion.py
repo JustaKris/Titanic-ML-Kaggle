@@ -9,7 +9,6 @@ from src.logger import logging
 @dataclass
 class DataIngestionConfig:
     # Default data input path
-    # raw_data_path: str = os.path.join('notebook', 'data', 'data.csv')
     raw_train_data_path: str = os.path.join('notebook', 'data', 'train.csv')
     raw_test_data_path: str = os.path.join('notebook', 'data', 'test.csv')
     # Export paths for safekeeping
@@ -28,8 +27,8 @@ class DataIngestion:
         self.ingestion_config = DataIngestionConfig()
         if raw_train_data_path:
             self.ingestion_config.raw_train_data_path = raw_train_data_path
-        if raw_test_data_path:
-            self.ingestion_config.raw_test_data_path = raw_test_data_path
+        # if raw_test_data_path:
+        #     self.ingestion_config.raw_test_data_path = raw_test_data_path
     
     def initiate_data_ingestion(self):
         """
@@ -41,17 +40,18 @@ class DataIngestion:
         logging.info("Entered the data ingestion method or component")
         try:
             # Reading the raw train and test data
-            # df = pd.read_csv(self.ingestion_config.raw_data_path)
-            train_df = pd.read_csv(self.ingestion_config.raw_train_data_path)
-            test_df = pd.read_csv(self.ingestion_config.raw_test_data_path)
-            logging.info(f"Read the train dataset as a dataframe with shape: {train_df.shape}")
-            logging.info(f"Read the test dataset as a dataframe with shape: {test_df.shape}")
+            df = pd.read_csv(self.ingestion_config.raw_train_data_path)
+            # train_df = pd.read_csv(self.ingestion_config.raw_train_data_path)
+            # test_df = pd.read_csv(self.ingestion_config.raw_test_data_path)
+            logging.info(f"Read the dataset as a dataframe with shape: {df.shape}")
+            # logging.info(f"Read the train dataset as a dataframe with shape: {train_df.shape}")
+            # logging.info(f"Read the test dataset as a dataframe with shape: {test_df.shape}")
 
             # Ensuring the artifacts directory exists
             os.makedirs(os.path.dirname(self.ingestion_config.processed_train_data_path), exist_ok=True)
 
             # Train Test split
-            # train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
+            train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
             
             # Saving the processed train and test data with 'output' in the filenames
             train_df.to_csv(self.ingestion_config.processed_train_data_path, index=False, header=True)
@@ -72,7 +72,7 @@ class DataIngestion:
             raise CustomException(e, sys)
 
 # Testing
-# if __name__ == "__main__":
-#     obj = DataIngestion()
-#     processed_train_data, processed_test_data = obj.initiate_data_ingestion()
-#     print(processed_train_data, processed_test_data)
+if __name__ == "__main__":
+    obj = DataIngestion()
+    processed_train_data, processed_test_data = obj.initiate_data_ingestion()
+    print(processed_train_data, processed_test_data)
