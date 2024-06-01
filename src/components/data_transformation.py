@@ -13,6 +13,7 @@ from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object
 from src.components.data_ingestion import DataIngestion
+from src.components.model_trainer import ModelTrainer
 
 
 @dataclass
@@ -137,12 +138,17 @@ class DataTransformation:
 if __name__ == "__main__":
     data_transformer = DataTransformation()
     data_ingestor = DataIngestion()
+    model_trainer = ModelTrainer()
 
     train_data_path, test_data_path = data_ingestor.initiate_data_ingestion()
     X_train, y_train, X_test, y_test, preprocessor_path = data_transformer.initiate_data_transformation(train_data_path, test_data_path)
 
-    print(X_train)
-    print(y_train)
-    print(X_test)
-    print(y_test)
-    print(preprocessor_path)
+    # print(X_train)
+    # print(y_train)
+    # print(X_test)
+    # print(y_test)
+    # print(preprocessor_path)
+
+    best_score = model_trainer.initiate_model_trainer(X_train, y_train, X_test, y_test)
+
+    print(best_score)
