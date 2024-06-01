@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="login">
+        <h1>Student Exam Performance Indicator</h1>
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+            <legend>Titanic Survival Prediction</legend>
+            <div class="mb-3">
+                <label class="form-label">How old are you?</label>
+                <input class="form-control" type="number" name="age" placeholder="Enter your age" min="0" max="100" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-control" name="gender" required>
+                    <option class="placeholder" selected disabled value="">Select your Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <select class="form-control" name="name_title" required>
+                    <option class="placeholder" selected disabled value="">Select your title</option>
+                    <option value="Mr">Mr</option>
+                    <option value="Miss">Miss</option>
+                    <option value="Mrs">Mrs</option>
+                    <option value="Master">Master</option>
+                    <option value="Dr">Dr</option>
+                    <option value="Rev">Rev</option>
+                    <option value="Major">Major</option>
+                    <option value="Col">Col</option>
+                    <option value="The Countess">The Countess</option>
+                    <option value="Ms">Ms</option>
+                    <option value="Sir">Sir</option>
+                    <option value="Lady">Lady</option>
+                    <option value="Don">Don</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Are you traveling with any siblings or a spouse?</label>
+                <select class="form-control" name="sibsp" required>
+                    <option class="placeholder" selected disabled value="">Select the number of people you are traveling with</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Passenger Class</label>
+                <select class="form-control" name="pclass" required>
+                    <option class="placeholder" selected disabled value="">Select ticket class</option>
+                    <option value="1">First class</option>
+                    <option value="2">Second class</option>
+                    <option value="3">Third class</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Embarked From</label>
+                <select class="form-control" name="embarked" required>
+                    <option class="placeholder" selected disabled value="">Enter port</option>
+                    <option value="C">Cherbourg</option>
+                    <option value="Q">Queenstown</option>
+                    <option value="S">Southampton</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Cabin size</label>
+                <select class="form-control" name="cabin_multiple" required>
+                    <option class="placeholder" selected disabled value="">Enter cabin size</option>
+                    <option value="0">1 person cabin</option>
+                    <option value="1">2 person cabin</option>
+                    <option value="2">3 person cabin</option>
+                    <option value="3">4 person cabin</option>
+                    <option value="4">5 person cabin</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Predict your Survival" />
+            </div>
+        </form>
+        <h2>{{ results }}</h2>
+    </div>
+</body>
+</html>
