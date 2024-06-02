@@ -125,7 +125,7 @@ class ModelTrainer:
                 
             # Check if top model is above a minimum score threshold
             if best_model_score < 0.6:
-                raise CustomException("Model score too low")
+                raise CustomException("No model with an F1 score above 60%")
             
             logging.info(f"Best model -> {best_model_name} with a F1 score of {round(best_model_score * 100, 1)}%")
 
