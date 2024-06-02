@@ -1,8 +1,14 @@
-# Titanic Survival Predictor App
+# Titanic Survival Prediction
 
-### Data Introduction:
+## Jupyter Notebook
 
-**The dataset** 
+There are two main parts to this project. First is the exploration of the Kaggle Titanic dataset with the aim of tuning a model and submiting predictions to the <b>Titanic - Machine Learning from Disaster</b> competition. All research and model training was done in Jupyter Notebook which can be found in the notebook folder.
+
+Link to Notebook -> [Titanic-Machine-Learning-from-Disaster](./notebook/Titanic-Machine-Learning-from-Disaster.ipynb)
+
+### Data Overview
+
+Kaggle Dataset Link -> [https://www.kaggle.com/competitions/titanic/data](https://www.kaggle.com/competitions/titanic/data)
 
 The goal is to predict the `Survival` variable (Classification).
 
@@ -22,17 +28,17 @@ There are 11 independent variables (including `PassengerId`):
 Target variable:
 * `Survived`: Boolean value => 0/1 - No/Yes
 
-Kaggle Dataset Link -> [https://www.kaggle.com/competitions/titanic/data](https://www.kaggle.com/competitions/titanic/data)
+## Predictor Web App
 
-# Render Deployment
+The second part is building an app using what I've learned from the conducted research. The app is designed to be scalable which is achieved by the use of data, model training and prediction pipelines. I have tried to follow python convention so that the app can be deployed to any remote environment.
+
+### Render Deployment
+
+The predictor app was deployed on render using a GitHub Workflow. A docker image is available as well.
 
 Render link -> [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggle.onrender.com)
 
-<!-- # UI
-
-![HomepageUI](./static/images/HomepageUI.jpg) -->
-
-# Project Approach
+### Web App Approach
 
 1. Data Ingestion: 
     * The Data Ingestion script reads the data in the format provided in Kaggle which is separate CSV files for the training and test sets. 
@@ -59,9 +65,3 @@ Render link -> [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggl
 
 5. Flask App:
     * A simple Flask app houses the user interface where input is received for the prediction pipeline and also displays the resulting output.
-
-# Jupyter Notebook
-
-All research and model training was done using Jupyter Notebook.
-
-Link to Notebook -> [Titanic-Machine-Learning-from-Disaster](./notebook/Titanic-Machine-Learning-from-Disaster.ipynb)
