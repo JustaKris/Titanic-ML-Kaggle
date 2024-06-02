@@ -2,13 +2,11 @@
 
 ## Jupyter Notebook
 
-There are two main parts to this project. First is the exploration of the Kaggle Titanic dataset with the aim of tuning a model and submiting predictions to the <b>Titanic - Machine Learning from Disaster</b> competition. All research and model training was done in Jupyter Notebook which can be found in the notebook folder.
+There are two main parts to this project. First is the exploration of the Kaggle Titanic dataset with the aim of tuning a model and submiting predictions to the <b>Titanic - Machine Learning from Disaster</b> competition. All research and model training was done in Jupyter Notebook.
 
 Link to Notebook -> [Titanic-Machine-Learning-from-Disaster](./notebook/Titanic-Machine-Learning-from-Disaster.ipynb)
 
 ### Data Overview
-
-Kaggle Dataset Link -> [https://www.kaggle.com/competitions/titanic/data](https://www.kaggle.com/competitions/titanic/data)
 
 The goal is to predict the `Survival` variable (Classification).
 
@@ -27,6 +25,8 @@ There are 11 independent variables (including `PassengerId`):
 
 Target variable:
 * `Survived`: Boolean value => 0/1 - No/Yes
+
+Kaggle Dataset Link -> [https://www.kaggle.com/competitions/titanic/data](https://www.kaggle.com/competitions/titanic/data)
 
 ## Predictor Web App
 
@@ -64,4 +64,4 @@ Render link -> [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggl
     * This pipeline utilizes the saved model and preprocessor object, loading each from the respective pickle file in order to predict a given datapoint and return the prediction along with the model's level of certainty.
 
 5. Flask App:
-    * A simple Flask app houses the user interface where input is received for the prediction pipeline and also displays the resulting output.
+    * A simple Flask app houses the user interface where input is received and passed to the prediction pipeline. The app then displays the resulting outcome.
