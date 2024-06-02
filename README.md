@@ -65,4 +65,4 @@ Render link: [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggle.
 
 All research and model training was done using Jupyter Notebook.
 
-Link: [Notebook](./notebook/Titanic-Machine-Learning-from-Disaster.ipynb)
+Link to Notebook file: [./notebook/Titanic-Machine-Learning-from-Disaster.ipynb](./notebook/Titanic-Machine-Learning-from-Disaster.ipynb)
