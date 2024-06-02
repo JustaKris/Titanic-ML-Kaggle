@@ -22,12 +22,11 @@ There are 11 independent variables (including `PassengerId`):
 Target variable:
 * `Survived`: Boolean value => 0/1 - No/Yes
 
-Kaggle Dataset Link:
-[https://www.kaggle.com/competitions/titanic/data](https://www.kaggle.com/competitions/titanic/data)
+Kaggle Dataset Link -> [https://www.kaggle.com/competitions/titanic/data](https://www.kaggle.com/competitions/titanic/data)
 
 # Render Deployment
 
-Render link: [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggle.onrender.com)
+Render link -> [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggle.onrender.com)
 
 <!-- # UI
 
