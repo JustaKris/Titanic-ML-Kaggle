@@ -34,17 +34,17 @@ setup(
     version='0.0.1',
     author='Kristiyan Bonev',
     author_email='k.s.bonev@gmail.com',
-    # description='A machine learning project to predict Titanic survival rates.',
-    # long_description=open('README.md', encoding='utf-8').read(),  # Assuming you have a README.md
-    # long_description_content_type='text/markdown',
-    # url='https://github.com/JustaKris/MLProject/tree/Titanic-Survival-Predictor-App',
+    description='A machine learning project to predict Titanic survival rate of a given datapoint.',
+    long_description=open('README.md', encoding='utf-8').read(),  # Assuming you have a README.md
+    long_description_content_type='text/markdown',
+    url='https://github.com/JustaKris/MLProject/tree/Titanic-Survival-Predictor-App',
     packages=find_packages(),
-    # install_requires=get_requirements('requirements.txt'),
-    install_requirements=get_requirements('requirements.txt'),
-    # classifiers=[
-    #     'Programming Language :: Python :: 3',
-    #     'License :: OSI Approved :: MIT License',
-    #     'Operating System :: OS Independent',
-    # ],
-    # python_requires='>=3.6',
+    install_requires=get_requirements('requirements.txt'),
+    # install_requirements=get_requirements('requirements.txt'),
+    classifiers=[
+        'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+    ],
+    python_requires='>=3.6',
 )
