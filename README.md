@@ -2,23 +2,25 @@
 
 ### Data Introduction:
 
-**The dataset** The goal is to predict the `Survival` variable (Classification).
+**The dataset** 
+
+The goal is to predict the `Survival` variable (Classification).
 
 There are 11 independent variables (including `PassengerId`):
 
-* `PassengerId` : Unique identifier of each passenger;
-* `pclass` : Ticket class refering to 1 - 1st, 2 - 2nd, 3 - 3rd;
-* `sex` : Passenger gender;
-* `Age` : Passenger age;
-* `sibsp` : Signifies the number of the passenger's siblings / spouses aboard the Titanic;
-* `parch` : Signifies the number of the passenger's parents / children aboard the Titanic;
-* `ticket` : Passenger's ticket number;
-* `fare` : Ticket cost;
-* `cabin` : Cabin number;
-* `embarked` : Port name from which the passenger embarked from;
+* `PassengerId` : Unique identifier of each passenger
+* `pclass` : Ticket class refering to 1 - 1st, 2 - 2nd, 3 - 3rd
+* `sex` : Passenger gender
+* `Age` : Passenger age
+* `sibsp` : Signifies the number of the passenger's siblings / spouses aboard the Titanic
+* `parch` : Signifies the number of the passenger's parents / children aboard the Titanic
+* `ticket` : Passenger's ticket number
+* `fare` : Ticket cost
+* `cabin` : Cabin number
+* `embarked` : Port name from which the passenger embarked from
 
 Target variable:
-* `Survived`: Boolean value => 0/1 - No/Yes.
+* `Survived`: Boolean value => 0/1 - No/Yes
 
 Kaggle Dataset Link:
 [https://www.kaggle.com/competitions/titanic/data](https://www.kaggle.com/competitions/titanic/data)
@@ -27,9 +29,9 @@ Kaggle Dataset Link:
 
 Render link: [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggle.onrender.com)
 
-# UI
+<!-- # UI
 
-![HomepageUI](./static/images/HomepageUI.jpg)
+![HomepageUI](./static/images/HomepageUI.jpg) -->
 
 # Project Approach
 
@@ -43,11 +45,11 @@ Render link: [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggle.
     * SimpleImputer is used for Categorical Features as well but with a strategy of `most frequent`. OneHotEncoder and StandardScaler are applied next.
     * This preprocessor is saved to a pickle file for later use.
     * Feature engineering - 5 features were created in order to either simplify a feature or try and derive more detailed information from it:
-        - `cabin_multiple`: Derived from the `cabin` feature with the aim of figuring out if the number of passengers per cabin has any relevance;
-        - `cabin_adv`: Also derived from cabin to split out only the cabin letters (A to G + T);
-        - `numeric_ticket`: Boolean value showing if a ticket is numeric or not (ended up being mostly irrelevant);
-        - `ticket_letters`: Same approach as cabin_adv (also ended up being irrelevant);
-        - `name_title`: Pilled from passenger names. Serves a very similar purpose to gender;
+        - `cabin_multiple`: Derived from the `cabin` feature with the aim of figuring out if the number of passengers per cabin has any relevance
+        - `cabin_adv`: Also derived from cabin to split out only the cabin letters (A to G + T)
+        - `numeric_ticket`: Boolean value showing if a ticket is numeric or not (ended up being mostly irrelevant)
+        - `ticket_letters`: Same approach as cabin_adv (also ended up being irrelevant)
+        - `name_title`: Pilled from passenger names. Serves a very similar purpose to gender
     
 
 3. Model Training: 
