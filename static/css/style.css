@@ -2,19 +2,18 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    /* background-color: #5690e7; */
     background-image: url('../images/Titanic_Main.jpg');
-    background-size: cover;  /* Ensures the image covers the entire background */
-    background-position: center;  /* Centers the image */
-    background-repeat: no-repeat;  /* Prevents the image from repeating */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .login {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white background */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -24,33 +23,37 @@ body {
 .login h1 {
     text-align: center;
     margin-bottom: 20px;
+    color: #000; /* Black text */
 }
 
 .form-label {
     margin-bottom: 5px;
     display: block;
     font-weight: bold;
+    color: #000; /* Black text */
 }
 
 .form-control {
-    width: 100%;
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    width: 100%; /* Adjust the width as needed */
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    transition: border-color 0.3s ease; /* Smooth transition for input borders */
 }
 
 .btn {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #007bff; /* Blue button */
     border: none;
     border-radius: 5px;
-    color: white;
+    color: #fff; /* White text */
     font-size: 16px;
     cursor: pointer;
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker blue on hover */
 }

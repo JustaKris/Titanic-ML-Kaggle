@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
     <div class="login">
@@ -14,7 +15,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Gender</label>
-                <select class="form-control" name="gender" required>
+                <select class="form-control" name="gender" required onclick="removePlaceholderOption(this)">
                     <option class="placeholder" selected disabled value="">Select gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -81,7 +82,7 @@
                 </select>
             </div>
             <div class="mb-3">
-                <input class="btn btn-primary" type="submit" value="Predict your Survival" />
+                <input class="btn btn-primary" type="submit" value="Predict Survival Rate" />
             </div>
         </form>
         <h2>{{ results }}</h2>
