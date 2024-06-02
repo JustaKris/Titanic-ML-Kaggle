@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images/Titanic_Main.jpg'); /* Set background image */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    color: #fff; /* Set text color to white */
+}
+
+.login {
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Add glowing effect */
+    width: 300px;
+}
+
+.login h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff; /* White text */
+}
+
+.form-label {
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    color: #fff; /* White text */
+}
+
+.form-control {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.123); /* Light border color */
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black background */
+    color: #fff; /* White text */
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
+}
+
+.form-control:focus {
+    border-color: #007bff; /* Highlight input border when focused */
+}
+
+select.form-control {
+    appearance: none;
+    padding-right: 30px;
+    background-image: url('../images/arrow-down.png');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    color: #fff; /* Light gray text */
+}
+
+select.form-control:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2); /* Add glowing effect on hover */
+}
+
+a:hover {
+    color: #007bff;
+}
+
+legend {
+    text-align: center; /* Center the legend */
+    margin-bottom: 20px; /* Add space below the legend */
+}

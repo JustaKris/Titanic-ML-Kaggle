@@ -4,6 +4,8 @@
 *predictions*
 *models*
 
+commands.sh
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -128,7 +130,7 @@ celerybeat.pid
 
 # Environments
 *catboost_info
-*artifacts
+# *artifacts
 .env
 .venv
 env/
