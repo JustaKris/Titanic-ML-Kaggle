@@ -2,9 +2,9 @@ name: Deploy Titanic Survival Predictor Flask App to Render
 
 on:
   push:
-    branches: [ "Titanic-Survival-Predictor-App" ]
+    branches: [ "main", "Titanic-Survival-Predictor-App" ]
   pull_request:
-    branches: [ "Titanic-Survival-Predictor-App" ]
+    branches: [ "main", "Titanic-Survival-Predictor-App" ]
   workflow_dispatch:
 
 jobs:
