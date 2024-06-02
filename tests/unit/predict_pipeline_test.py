@@ -15,7 +15,8 @@ class TestCustomData(TestCase):
             cabin_multiple=1
         )
         df = custom_data.get_data_as_data_frame()
-        expected_columns = ["Age", "Sex", "SibSp", "name_title", "Pclass", "Embarked", "cabin_multiple", "Parch", "cabin_adv", "numeric_ticket", "norm_fare"]
+        # expected_columns = ["Age", "Sex", "SibSp", "name_title", "Pclass", "Embarked", "cabin_multiple", "Parch", "cabin_letters", "numeric_ticket", "norm_fare"]
+        expected_columns = ["Age", "Sex", "SibSp", "name_title", "Pclass", "Embarked", "cabin_multiple", "Parch", "norm_fare"]
         self.assertListEqual(list(df.columns), expected_columns)
         self.assertListEqual(df.Age.tolist(), [float(custom_data.age)])
 
@@ -32,8 +33,8 @@ class TestPredictPipeline(TestCase):
             "Embarked": ["C"],
             "cabin_multiple": [1],
             "Parch": [0],
-            "cabin_adv": ["C"],
-            "numeric_ticket": [1],
+            # "cabin_letters": ["C"],
+            # "numeric_ticket": [1],
             "norm_fare": [4.2]
         })
         

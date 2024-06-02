@@ -45,14 +45,6 @@ class ModelTrainer:
                     'C' : np.logspace(-4, 4, 20),
                     'solver' : ['liblinear']
                     },
-                # 'Random Forest Classifier': {
-                #     'n_estimators': [100, 500, 1000], 
-                #     'bootstrap': [True, False],
-                #     'max_depth': [3, 5, 10, 20, 50, 75, 100, None],
-                #     'max_features': ['auto', 'sqrt'],
-                #     'min_samples_leaf': [1, 2, 4, 10],
-                #     'min_samples_split': [2, 5, 10]
-                #     },
                 'Random Forest Classifier': {
                     'n_estimators': [400, 450, 500, 550],
                     'criterion':['gini', 'entropy'], 
@@ -73,18 +65,6 @@ class ModelTrainer:
                     {'kernel': ['linear'], 'C': [.1, 1, 10, 100, 1000]},
                     {'kernel': ['poly'], 'degree' : [2, 3, 4, 5], 'C': [.1, 1, 10, 100, 1000]}
                     ],
-                # 'XGB Classifier': {
-                #     'n_estimators': [20, 50, 100, 250, 500,1000],
-                #     'colsample_bytree': [0.2, 0.5, 0.7, 0.8, 1],
-                #     'max_depth': [2, 5, 10, 15, 20, 25, None],
-                #     'reg_alpha': [0, 0.5, 1],
-                #     'reg_lambda': [1, 1.5, 2],
-                #     'subsample': [0.5,0.6,0.7, 0.8, 0.9],
-                #     'learning_rate':[.01,0.1,0.2,0.3,0.5, 0.7, 0.9],
-                #     'gamma':[0,.01,.1,1,10,100],
-                #     'min_child_weight':[0,.01,0.1,1,10,100],
-                #     'sampling_method': ['uniform', 'gradient_based']
-                #     },
                 'XGB Classifier': {
                     'n_estimators': [450, 500, 550],
                     'colsample_bytree': [0.75, 0.8, 0.85],
@@ -109,28 +89,31 @@ class ModelTrainer:
                 y_test=y_test
                 )
             
-            # tuned_model_tuples = [(model_name, model[0]) for model_name, model in model_report.items()]
-            # voting_clf = VotingClassifier(estimators=tuned_model_tuples, voting='soft')
+            # Voting Classifier fiasco
+            tuned_model_tuples = [(model_name, model[0]) for model_name, model in model_report.items()]
+            voting_clf = VotingClassifier(estimators=tuned_model_tuples, voting='soft')
 
-            # # In a soft voting classifier you can apply weights to each of the models. Let's use a grid search to explore different weightings:
-            # combinations = itertools.product([1, 2], repeat=len(tuned_model_tuples))  # Generate all possible combinations of weights
-            # combinations = [list(comb) for comb in combinations if len(set(comb)) != 1]  # Filter out the combinations where all elements are the same
+            # In a soft voting classifier you can apply weights to each of the models. Let's use a grid search to explore different weightings:
+            combinations = itertools.product([1, 2], repeat=len(tuned_model_tuples))  # Generate all possible combinations of weights
+            combinations = [list(comb) for comb in combinations if len(set(comb)) != 1]  # Filter out the combinations where all elements are the same
             
-            # voting_classifier_params = {'Voting Classifier': {'weights': combinations, 'voting': ['soft', 'hard']}}
+            voting_classifier_params = {'Voting Classifier': {'weights': combinations, 'voting': ['soft', 'hard']}}
 
-            # tuned_voting_clf = optimise_models(
-            #     {'Voting Classifier': voting_clf},
-            #     voting_classifier_params,
-            #     X_train,
-            #     y_train,
-            #     X_test,
-            #     y_test
-            # )
+            tuned_voting_clf = optimise_models(
+                {'Voting Classifier': voting_clf},
+                voting_classifier_params,
+                X_train,
+                y_train,
+                X_test,
+                y_test
+            )
+            model_report['Voting Classifier'] = tuned_voting_clf['Voting Classifier']
+            model_report = dict(sorted(model_report.items(), key=lambda item: -item[1][1]))
 
             # Retrieve models and return sorted list of tuples by score
             best_model_name, best_model_tuple = list(model_report.items())[0]
             best_model, best_model_score = best_model_tuple
-
+                
             # Check if top model is above a minimum score threshold
             if best_model_score < 0.6:
                 raise CustomException("Model score too low")

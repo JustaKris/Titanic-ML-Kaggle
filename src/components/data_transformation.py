@@ -68,9 +68,9 @@ class DataTransformation:
     def _apply_feature_engineering(self, df: pd.DataFrame) -> pd.DataFrame:
         # Feature engineering
         df['cabin_multiple'] = df.Cabin.apply(lambda x: 0 if pd.isna(x) else len(x.split(' ')))
-        df['cabin_adv'] = df.Cabin.apply(lambda x: str(x)[0])
-        df['numeric_ticket'] = df.Ticket.apply(lambda x: 1 if x.isnumeric() else 0)
-        df['ticket_letters'] = df.Ticket.apply(lambda x: ''.join(x.split(' ')[:-1]).replace('.', '').replace('/', '').lower() if len(x.split(' ')[:-1]) > 0 else 0)
+        # df['cabin_letters'] = df.Cabin.apply(lambda x: str(x)[0])
+        # df['numeric_ticket'] = df.Ticket.apply(lambda x: 1 if x.isnumeric() else 0)
+        # df['ticket_letters'] = df.Ticket.apply(lambda x: ''.join(x.split(' ')[:-1]).replace('.', '').replace('/', '').lower() if len(x.split(' ')[:-1]) > 0 else 0)
         df['name_title'] = df.Name.apply(lambda x: x.split(',')[1].split('.')[0].strip())
 
         # # Log norm of fare
@@ -85,8 +85,7 @@ class DataTransformation:
             "Name",  # Person's name will have no relevance
             "Fare",  # Replaced by norm_fare
             "Cabin",  # Split into several other features
-            "Ticket",  # Just ticket ids
-            "ticket_letters"  # Doesn't seem to be of much relevance
+            "Ticket"  # Just ticket ids
         ]
         df.drop(columns=columns_to_drop, inplace=True)
 
@@ -110,11 +109,14 @@ class DataTransformation:
             # Saving mode values of each column for later use
             train_df.to_csv(os.path.join('artifacts', 'train_augmented.csv'), index=False, header=True)
             test_df.to_csv(os.path.join('artifacts', 'test_augmented.csv'), index=False, header=True)
-            # train_df.mode().to_csv(os.path.join('artifacts', 'train_mode.csv'), index=False, header=True)  # Saving mode of train data for future use
 
-            numerical_columns = ["Age", "SibSp", "Parch", "norm_fare", "cabin_multiple", "numeric_ticket"]
-            categorical_columns = ["Pclass", "Sex", "Embarked", "cabin_adv", "name_title"]
+            # Column lists for each preprocessor pipeline
+            # numerical_columns = ["Age", "SibSp", "Parch", "norm_fare", "cabin_multiple", "numeric_ticket"]
+            # categorical_columns = ["Pclass", "Sex", "Embarked", "cabin_letters", "name_title"]
+            numerical_columns = ["Age", "SibSp", "Parch", "norm_fare", "cabin_multiple"]
+            categorical_columns = ["Pclass", "Sex", "Embarked", "name_title"]
 
+            # Preprocessing
             preprocessor = self._create_column_transformer(numerical_columns, categorical_columns)
 
             X_train = preprocessor.fit_transform(train_df.drop(columns=["Survived"]))
@@ -124,7 +126,8 @@ class DataTransformation:
             y_test = test_df["Survived"].values
 
             logging.info("Preprocessed dataframes.")
-
+            
+            # Saving preprocessor object for future use
             save_object(self.data_transformation_config.preprocessor_obj_file_path, preprocessor)
 
             return X_train, y_train, X_test, y_test, self.data_transformation_config.preprocessor_obj_file_path

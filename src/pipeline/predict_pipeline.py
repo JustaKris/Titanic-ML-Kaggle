@@ -69,8 +69,8 @@ class CustomData:
                 "Embarked": [self.embarked],
                 "cabin_multiple": [int(self.cabin_multiple)],
                 "Parch": filler_dict["Parch"],
-                "cabin_adv": filler_dict["cabin_adv"],
-                "numeric_ticket": filler_dict["numeric_ticket"],
+                # "cabin_letters": filler_dict["cabin_letters"],
+                # "numeric_ticket": filler_dict["numeric_ticket"],
                 "norm_fare": filler_dict["norm_fare"]
             }
 
@@ -109,8 +109,8 @@ class CustomData:
             # Replace generic filler odes with case specific ones
             if not filtered_data.empty:
                 data_filler_dict["Parch"] = filtered_data["Parch"].mode().iloc[0]
-                data_filler_dict["cabin_adv"] = filtered_data["cabin_adv"].mode().iloc[0]
-                data_filler_dict["numeric_ticket"] = filtered_data["numeric_ticket"].mode().iloc[0]
+                # data_filler_dict["cabin_letters"] = filtered_data["cabin_letters"].mode().iloc[0]
+                # data_filler_dict["numeric_ticket"] = filtered_data["numeric_ticket"].mode().iloc[0]
                 data_filler_dict["norm_fare"] = filtered_data["norm_fare"].mean()
 
             return data_filler_dict

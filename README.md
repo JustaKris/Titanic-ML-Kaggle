@@ -41,14 +41,14 @@ Render link: [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggle.
 
 2. Data Transformation: 
     * In this phase a ColumnTransformer Pipeline is created to handle all of the data transfromation.
-    * SimpleImputer is used for Numeric features with a strategy of `median`. Then the data is scaled using StandardScaler.
+    * SimpleImputer is used for Numeric features with a strategy of `median`. Then the data is scaled using StandardScaler. The only exception is `Fare`which gets replaced by `norm_fare` a normalized (log(Fare + 1)) version of the feature.
     * SimpleImputer is used for Categorical Features as well but with a strategy of `most frequent`. OneHotEncoder and StandardScaler are applied next.
     * This preprocessor is saved to a pickle file for later use.
-    * Feature engineering - 5 features were created in order to either simplify a feature or try and derive more detailed information from it:
+    * Feature engineering - a few features were created in order to either simplify a feature or try and derive more detailed information from it:
         - `cabin_multiple`: Derived from the `cabin` feature with the aim of figuring out if the number of passengers per cabin has any relevance
-        - `cabin_adv`: Also derived from cabin to split out only the cabin letters (A to G + T)
+        <!-- - `cabin_letters`: Also derived from cabin to split out only the cabin letters (A to G + T)
         - `numeric_ticket`: Boolean value showing if a ticket is numeric or not (ended up being mostly irrelevant)
-        - `ticket_letters`: Same approach as cabin_adv (also ended up being irrelevant)
+        - `ticket_letters`: Same approach as cabin_letters (also ended up being irrelevant) -->
         - `name_title`: Pilled from passenger names. Serves a very similar purpose to gender
     
 
