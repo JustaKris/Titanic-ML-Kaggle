@@ -41,31 +41,14 @@ class PredictPipeline:
         
 
 class CustomData:
-    def __init__(
-            self, 
-            age: int, 
-            sex: str, 
-            sibsp: int, 
-            name_title: str, 
-            pclass: str, 
-            # parch: int, 
-            embarked: str, 
-            # cabin_adv: str, 
-            cabin_multiple: int, 
-            # numeric_ticket: int, 
-            # norm_fare: float
-            ) -> None:
+    def __init__(self, age: int,  sex: str, sibsp: int, name_title: str, pclass: str, embarked: str,  cabin_multiple: int) -> None:
         self.age = age
         self.sex = sex
         self.sibsp = sibsp
         self.name_title = name_title
         self.pclass = pclass
-        # self.parch = parch
         self.embarked = embarked
-        # self.cabin_adv = cabin_adv
         self.cabin_multiple = cabin_multiple
-        # self.numeric_ticket = numeric_ticket
-        # self.norm_fare = norm_fare
         
     def get_data_as_data_frame(self):
         """
@@ -84,10 +67,10 @@ class CustomData:
                 "SibSp": [int(self.sibsp)],
                 "name_title": [self.name_title],
                 "Pclass": [int(self.pclass)],
-                "Parch": filler_dict["Parch"],
                 "Embarked": [self.embarked],
-                "cabin_adv": filler_dict["cabin_adv"],
                 "cabin_multiple": [int(self.cabin_multiple)],
+                "Parch": filler_dict["Parch"],
+                "cabin_adv": filler_dict["cabin_adv"],
                 "numeric_ticket": filler_dict["numeric_ticket"],
                 "norm_fare": filler_dict["norm_fare"]
             }

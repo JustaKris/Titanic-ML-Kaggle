@@ -6,7 +6,11 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f2f5;
+    /* background-color: #5690e7; */
+    background-image: url('../images/Titanic_Main.jpg');
+    background-size: cover;  /* Ensures the image covers the entire background */
+    background-position: center;  /* Centers the image */
+    background-repeat: no-repeat;  /* Prevents the image from repeating */
 }
 
 .login {

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="login">
-        <h1>Student Exam Performance Indicator</h1>
+        <h1>Titanic Survival Predictor</h1>
         <form action="{{ url_for('predict_datapoint') }}" method="post">
-            <legend>Titanic Survival Prediction</legend>
+            <legend>Enter required data to generate a likelyhood of survival</legend>
             <div class="mb-3">
-                <label class="form-label">How old are you?</label>
-                <input class="form-control" type="number" name="age" placeholder="Enter your age" min="0" max="100" required />
+                <label class="form-label">Age</label>
+                <input class="form-control" type="number" name="age" placeholder="Enter age" min="0" max="100" required />
             </div>
             <div class="mb-3">
                 <label class="form-label">Gender</label>
                 <select class="form-control" name="gender" required>
-                    <option class="placeholder" selected disabled value="">Select your Gender</option>
+                    <option class="placeholder" selected disabled value="">Select gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
@@ -23,7 +23,7 @@
             <div class="mb-3">
                 <label class="form-label">Title</label>
                 <select class="form-control" name="name_title" required>
-                    <option class="placeholder" selected disabled value="">Select your title</option>
+                    <option class="placeholder" selected disabled value="">Select title</option>
                     <option value="Mr">Mr</option>
                     <option value="Miss">Miss</option>
                     <option value="Mrs">Mrs</option>
@@ -42,8 +42,8 @@
             <div class="mb-3">
                 <label class="form-label">Are you traveling with any siblings or a spouse?</label>
                 <select class="form-control" name="sibsp" required>
-                    <option class="placeholder" selected disabled value="">Select the number of people you are traveling with</option>
-                    <option value="0">0</option>
+                    <option class="placeholder" selected disabled value="">Number of people</option>
+                    <option value="0">None</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -52,18 +52,18 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label class="form-label">Passenger Class</label>
+                <label class="form-label">Ticket Class</label>
                 <select class="form-control" name="pclass" required>
                     <option class="placeholder" selected disabled value="">Select ticket class</option>
-                    <option value="1">First class</option>
-                    <option value="2">Second class</option>
-                    <option value="3">Third class</option>
+                    <option value="1">First</option>
+                    <option value="2">Second</option>
+                    <option value="3">Third</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label class="form-label">Embarked From</label>
                 <select class="form-control" name="embarked" required>
-                    <option class="placeholder" selected disabled value="">Enter port</option>
+                    <option class="placeholder" selected disabled value="">Enter Port Name</option>
                     <option value="C">Cherbourg</option>
                     <option value="Q">Queenstown</option>
                     <option value="S">Southampton</option>
