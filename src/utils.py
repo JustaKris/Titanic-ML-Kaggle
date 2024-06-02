@@ -3,6 +3,7 @@ import sys
 import dill
 import warnings
 import logging
+from sklearn.exceptions import ConvergenceWarning
 from sklearn.model_selection import GridSearchCV 
 from sklearn.model_selection import RandomizedSearchCV 
 from sklearn.metrics import f1_score, make_scorer
@@ -75,6 +76,7 @@ def optimise_models(models: dict, params: dict, X_train, y_train, X_test=None, y
 
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", UserWarning)
+            warnings.simplefilter("ignore", ConvergenceWarning)
         
             # Setup GridSearchCV for current model
             tuned_model = GridSearchCV(

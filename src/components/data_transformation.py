@@ -68,9 +68,6 @@ class DataTransformation:
     def _apply_feature_engineering(self, df: pd.DataFrame) -> pd.DataFrame:
         # Feature engineering
         df['cabin_multiple'] = df.Cabin.apply(lambda x: 0 if pd.isna(x) else len(x.split(' ')))
-        # df['cabin_letters'] = df.Cabin.apply(lambda x: str(x)[0])
-        # df['numeric_ticket'] = df.Ticket.apply(lambda x: 1 if x.isnumeric() else 0)
-        # df['ticket_letters'] = df.Ticket.apply(lambda x: ''.join(x.split(' ')[:-1]).replace('.', '').replace('/', '').lower() if len(x.split(' ')[:-1]) > 0 else 0)
         df['name_title'] = df.Name.apply(lambda x: x.split(',')[1].split('.')[0].strip())
 
         # # Log norm of fare
@@ -111,8 +108,6 @@ class DataTransformation:
             test_df.to_csv(os.path.join('artifacts', 'test_augmented.csv'), index=False, header=True)
 
             # Column lists for each preprocessor pipeline
-            # numerical_columns = ["Age", "SibSp", "Parch", "norm_fare", "cabin_multiple", "numeric_ticket"]
-            # categorical_columns = ["Pclass", "Sex", "Embarked", "cabin_letters", "name_title"]
             numerical_columns = ["Age", "SibSp", "Parch", "norm_fare", "cabin_multiple"]
             categorical_columns = ["Pclass", "Sex", "Embarked", "name_title"]
 

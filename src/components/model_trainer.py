@@ -11,6 +11,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from xgboost import XGBClassifier
+from catboost import CatBoostClassifier
 from sklearn.ensemble import VotingClassifier
 
 from src.exception import CustomException
@@ -30,53 +31,61 @@ class ModelTrainer:
         try:
             # Dictionary of model to evaluate
             models = {
-                'Logistic Regression': LogisticRegression(max_iter=2000),
-                # 'Random Forest Classifier': RandomForestClassifier(random_state=1),
-                # 'KNeighbors Classifier': KNeighborsClassifier(),
-                # 'SVC': SVC(probability=True),
-                'XGB Classifier': XGBClassifier(random_state=1)
+                # 'Logistic Regression': LogisticRegression(max_iter=2000),
+                'Random Forest Classifier': RandomForestClassifier(random_state=1),
+                'KNeighbors Classifier': KNeighborsClassifier(),
+                'SVC': SVC(probability=True),
+                'XGB Classifier': XGBClassifier(random_state=1),
+                # 'CatBoost Classifier': CatBoostClassifier(silent=True)
             }
 
             # Hyperparameter dictionary for each model
             params = {
                 'Logistic Regression': {
-                    'max_iter' : [2000],
+                    'max_iter' : [10, 50, 100, 1000],
                     'penalty' : ['l1', 'l2'],
                     'C' : np.logspace(-4, 4, 20),
                     'solver' : ['liblinear']
                     },
                 'Random Forest Classifier': {
-                    'n_estimators': [400, 450, 500, 550],
+                    'n_estimators': [100, 300, 450],
                     'criterion':['gini', 'entropy'], 
                     'bootstrap': [True],
-                    'max_depth': [15, 20, 25],
-                    'max_features': ['sqrt', 'log2', 10],
-                    'min_samples_leaf': [2,3],
-                    'min_samples_split': [2,3]
+                    'max_depth': [10, 15],
+                    'max_features': ['sqrt', 20, 40],
+                    'min_samples_leaf': [1, 2],
+                    'min_samples_split': [.5, 2]
                     },
                 'KNeighbors Classifier': {
-                    'n_neighbors' : [3, 5, 7, 9],
+                    'n_neighbors' : [3, 5, 7, 9, 12, 15],
                     'weights' : ['uniform', 'distance'],
                     'algorithm' : ['ball_tree', 'kd_tree'],
                     'p' : [1, 2]
                     },
                 'SVC': [
-                    {'kernel': ['rbf'], 'gamma': [.1, .5, 1, 2, 5, 10], 'C': [.1, 1, 10, 100, 1000]},
-                    {'kernel': ['linear'], 'C': [.1, 1, 10, 100, 1000]},
-                    {'kernel': ['poly'], 'degree' : [2, 3, 4, 5], 'C': [.1, 1, 10, 100, 1000]}
+                    {'kernel': ['rbf'], 'gamma': [.1, .5, 1, 2, 5, 10], 'C': [.1, 1, 10]},
+                    {'kernel': ['linear'], 'C': [.1, 1, 10]},
+                    {'kernel': ['poly', 'linear', 'rbf'], 'degree' : [1, 2, 3], 'C': [.1, 1, 10]}
                     ],
                 'XGB Classifier': {
-                    'n_estimators': [450, 500, 550],
-                    'colsample_bytree': [0.75, 0.8, 0.85],
-                    'max_depth': [None],
+                    'n_estimators': [500, 550],
+                    'colsample_bytree': [.5, .6, .75],
+                    'max_depth': [10, None],
                     'reg_alpha': [1],
-                    'reg_lambda': [2, 5, 10],
-                    'subsample': [0.55, 0.6, .65],
-                    'learning_rate':[0.5],
-                    'gamma':[.5, 1, 2],
+                    'reg_lambda': [5, 10, 15],
+                    'subsample': [.55, .6, .65],
+                    'learning_rate':[.5],
+                    'gamma':[.25, .5, 1],
                     'min_child_weight':[0.01],
                     'sampling_method': ['uniform']
                     },
+                'CatBoost Classifier': {
+                    'iterations': [400, 500],
+                    'learning_rate': [0.01, 0.05, 0.1],
+                    'depth': [2, 4, 6],
+                    'l2_leaf_reg': [1, 2],
+                    'border_count': [64, 128]
+                }
             }
             
             # Evaluate models
@@ -118,7 +127,7 @@ class ModelTrainer:
             if best_model_score < 0.6:
                 raise CustomException("Model score too low")
             
-            logging.info("Found best model")
+            logging.info(f"Best model -> {best_model_name} with a F1 score of {round(best_model_score * 100, 1)}%")
 
             # Save best performing model
             save_object(
