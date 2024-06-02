@@ -154,4 +154,4 @@ if __name__ == "__main__":
 
     best_score = model_trainer.initiate_model_trainer(X_train, y_train, X_test, y_test)
 
-    print(best_score)
+    # print(best_score)

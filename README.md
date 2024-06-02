@@ -44,12 +44,9 @@ Render link: [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggle.
     * SimpleImputer is used for Numeric features with a strategy of `median`. Then the data is scaled using StandardScaler. The only exception is `Fare`which gets replaced by `norm_fare` a normalized (log(Fare + 1)) version of the feature.
     * SimpleImputer is used for Categorical Features as well but with a strategy of `most frequent`. OneHotEncoder and StandardScaler are applied next.
     * This preprocessor is saved to a pickle file for later use.
-    * Feature engineering - a few features were created in order to either simplify a feature or try and derive more detailed information from it:
+    * Feature engineering - a few features were created in order to either simplify an existing feature or try and derive more detailed information from it:
         - `cabin_multiple`: Derived from the `cabin` feature with the aim of figuring out if the number of passengers per cabin has any relevance
-        <!-- - `cabin_letters`: Also derived from cabin to split out only the cabin letters (A to G + T)
-        - `numeric_ticket`: Boolean value showing if a ticket is numeric or not (ended up being mostly irrelevant)
-        - `ticket_letters`: Same approach as cabin_letters (also ended up being irrelevant) -->
-        - `name_title`: Pilled from passenger names. Serves a very similar purpose to gender
+        - `name_title`: Pulled from passenger names and serves a very similar purpose to gender
     
 
 3. Model Training: 
@@ -62,7 +59,7 @@ Render link: [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggle.
     * This pipeline utilizes the saved model and preprocessor object, loading each from the respective pickle file in order to predict a given datapoint and return the prediction along with the model's level of certainty.
 
 5. Flask App:
-    * A simple Flask app houses the user interface wher input is received for the prediction pipeline and also displays the resulting output.
+    * A simple Flask app houses the user interface where input is received for the prediction pipeline and also displays the resulting output.
 
 # Jupyter Notebook
 
