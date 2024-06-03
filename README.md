@@ -34,7 +34,7 @@ The second part is building an app using what I've learned from the conducted re
 
 ### Render Deployment
 
-The predictor app was deployed on render using a GitHub Workflow. A docker image is available as well.
+The predictor app was deployed on render using a GitHub Workflow. It's using a basic Rended plan so it might take up to a minute for the app to load if it hasn't been used recently.
 
 Render link -> [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggle.onrender.com)
 

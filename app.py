@@ -33,11 +33,11 @@ def predict_datapoint():
                 cabin_multiple=request.form.get('cabin_multiple')
             )
             pred_df = data.get_data_as_data_frame()
-            print(pred_df.head())
+            # print(pred_df.head())
+            # print(pred_df.info())
             
             # Logging data frame information
-            app.logger.info(f"Prediction DataFrame: {pred_df.head()}")
-            app.logger.info(pred_df.info())
+            app.logger.info(f"Prediction DataFrame: \n{pred_df.head()}")
             
             predict_pipeline = PredictPipeline()
             prediction, probability = predict_pipeline.predict(pred_df)

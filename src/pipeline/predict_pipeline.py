@@ -62,11 +62,11 @@ class CustomData:
         try:
             custom_data_input_dict = {
                 "Age": [float(self.age)],
-                "Sex": [self.sex],
+                "Sex": [str(self.sex)],
                 "SibSp": [int(self.sibsp)],
-                "name_title": [self.name_title],
+                "name_title": [str(self.name_title)],
                 "Pclass": [int(self.pclass)],
-                "Embarked": [self.embarked],
+                "Embarked": [str(self.embarked)],
                 "cabin_multiple": [int(self.cabin_multiple)],
                 "Parch": filler_dict["Parch"],
                 "norm_fare": filler_dict["norm_fare"]
@@ -95,13 +95,13 @@ class CustomData:
             data_filler_dict = all_data.mode().iloc[0].to_dict()
 
             # Setting up a filtered df to store all passangers within a given range approximating the provided data
-            filtered_data = all_data[(all_data['Sex'] == self.sex) 
+            filtered_data = all_data[(all_data['Sex'] == str(self.sex)) 
                                     #  & (all_data['name_title'] == self.name_title) 
-                                    & (all_data['Pclass'] == self.pclass)
-                                    & (all_data['Embarked'] == self.embarked)
+                                    & (all_data['Pclass'] == int(self.pclass))
+                                    & (all_data['Embarked'] == str(self.embarked))
                                     & (all_data['Age'].between(float(self.age) - 3, float(self.age) + 3))
                                     ]
-            print(filtered_data.head())
+            print("Filtered Data Subset:\n", filtered_data.head())
             # print(filtered_data.info())
 
             # Replace generic filler odes with case specific ones
@@ -127,7 +127,7 @@ if __name__ == "__main__":
         cabin_multiple=1
         )
     df = custom_data.get_data_as_data_frame()
-    print(df)
+    print(df.head())
 
     pipeline = PredictPipeline()
     prediction, probability = pipeline.predict(df)
