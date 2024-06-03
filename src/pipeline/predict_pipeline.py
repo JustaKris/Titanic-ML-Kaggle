@@ -40,7 +40,7 @@ class PredictPipeline:
         
 
 class CustomData:
-    def __init__(self, age: int,  sex: str, sibsp: int, name_title: str, pclass: str, embarked: str,  cabin_multiple: int) -> None:
+    def __init__(self, age: int, sex: str, sibsp: int, name_title: str, pclass: str, embarked: str, cabin_multiple: int) -> None:
         self.age = age
         self.sex = sex
         self.sibsp = sibsp
@@ -101,11 +101,12 @@ class CustomData:
                                     & (all_data['Embarked'] == str(self.embarked))
                                     & (all_data['Age'].between(float(self.age) - 3, float(self.age) + 3))
                                     ]
-            print("Filtered Data Subset:\n", filtered_data.head())
-            # print(filtered_data.info())
+            # print("Filtered Data Subset:\n", filtered_data.head())
+            # print("Filtered Data Subset Info:\n", filtered_data.info())
 
             # Replace generic filler odes with case specific ones
             if not filtered_data.empty:
+                data_filler_dict["cabin_multiple"] = filtered_data["cabin_multiple"].mode().iloc[0]  # Not currently being used
                 data_filler_dict["Parch"] = filtered_data["Parch"].mode().iloc[0]
                 data_filler_dict["norm_fare"] = filtered_data["norm_fare"].mean()
 

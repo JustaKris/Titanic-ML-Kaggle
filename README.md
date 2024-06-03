@@ -53,7 +53,6 @@ Render link -> [https://titanic-ml-kaggle.onrender.com](https://titanic-ml-kaggl
         - `cabin_multiple`: Derived from the `cabin` feature with the aim of figuring out if the number of passengers per cabin has any relevance
         - `name_title`: Pulled from passenger names and serves a very similar purpose to gender
     
-
 3. Model Training: 
     * This script trains and evaluates a list of provoded models.
     * Hyperparameters for the most promissing models are tuned as well.

@@ -87,3 +87,31 @@ legend {
     text-align: center; /* Center the legend */
     margin-bottom: 20px; /* Add space below the legend */
 }
+
+.results-output {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ffffff; /* Yellow text for results */
+}
+
+.results-btn {
+    display: inline-block;
+    width: calc(100% - 20px);
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.results-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2); /* Add glowing effect on hover */
+    color: #ffffff;
+}
