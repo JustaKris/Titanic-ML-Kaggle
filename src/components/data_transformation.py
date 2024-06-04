@@ -1,5 +1,6 @@
 import os
 import sys
+import warnings
 import numpy as np
 import pandas as pd
 from dataclasses import dataclass
@@ -15,6 +16,10 @@ from src.utils import save_object
 from src.components.data_ingestion import DataIngestion
 from src.components.model_trainer import ModelTrainer
 
+warnings.filterwarnings('ignore')
+
+
+TARGET = "Survived"
 
 @dataclass
 class DataTransformationConfig:
@@ -72,6 +77,7 @@ class DataTransformation:
 
         # # Log norm of fare
         df['norm_fare'] = np.log(df.Fare + 1)
+        # df['norm_fare'] = df['Fare'].map(lambda i: np.log(i) if i > 0 else 0)
 
         # Dropping passagers which have not embarked as those records are of no real use
         df.dropna(subset=['Embarked'], inplace=True)
@@ -80,13 +86,29 @@ class DataTransformation:
         columns_to_drop = [
             "PassengerId",  # Just a unique identifier for each record
             "Name",  # Person's name will have no relevance
+            "Ticket",  # Just ticket ids
             "Fare",  # Replaced by norm_fare
             "Cabin",  # Split into several other features
-            "Ticket"  # Just ticket ids
+            # "SibSp", 
+            # "Parch", 
+            # "norm_fare", 
+            # "cabin_multiple",
+            # "Embarked", 
+            # "name_title"
         ]
         df.drop(columns=columns_to_drop, inplace=True)
 
-        return df
+        cols = df.columns
+        num_cols = list(df.select_dtypes('number'))
+        cat_cols = list(set(cols) - set(num_cols))
+        num_cols.remove(TARGET)
+
+        # print(num_cols)
+        # print(cat_cols)
+
+        # exit()
+
+        return df, num_cols, cat_cols
 
     def initiate_data_transformation(self, train_path: str, test_path: str):
         try:
@@ -100,25 +122,27 @@ class DataTransformation:
 
             logging.info("Read train and test data")
 
-            train_df = self._apply_feature_engineering(train_df)
-            test_df = self._apply_feature_engineering(test_df)
+            train_df, numerical_columns, categorical_columns = self._apply_feature_engineering(train_df)
+            test_df, _, _ = self._apply_feature_engineering(test_df)
 
             # Saving mode values of each column for later use
             train_df.to_csv(os.path.join('artifacts', 'train_augmented.csv'), index=False, header=True)
             test_df.to_csv(os.path.join('artifacts', 'test_augmented.csv'), index=False, header=True)
 
             # Column lists for each preprocessor pipeline
-            numerical_columns = ["Age", "SibSp", "Parch", "norm_fare", "cabin_multiple"]
-            categorical_columns = ["Pclass", "Sex", "Embarked", "name_title"]
+            # numerical_columns = ["Age", "SibSp", "Parch", "norm_fare", "cabin_multiple"]
+            # categorical_columns = ["Pclass", "Sex", "Embarked", "name_title"]
+            # numerical_columns = ["Age"]
+            # categorical_columns = ["Pclass", "Sex"]
 
             # Preprocessing
             preprocessor = self._create_column_transformer(numerical_columns, categorical_columns)
 
-            X_train = preprocessor.fit_transform(train_df.drop(columns=["Survived"]))
-            y_train = train_df["Survived"].values
+            X_train = preprocessor.fit_transform(train_df.drop(columns=[TARGET]))
+            y_train = train_df[TARGET].values
 
-            X_test = preprocessor.transform(test_df.drop(columns=["Survived"]))
-            y_test = test_df["Survived"].values
+            X_test = preprocessor.transform(test_df.drop(columns=[TARGET]))
+            y_test = test_df[TARGET].values
 
             logging.info("Preprocessed dataframes.")
             
@@ -139,11 +163,10 @@ class DataTransformation:
 
 
 if __name__ == "__main__":
-    data_transformer = DataTransformation()
     data_ingestor = DataIngestion()
-    model_trainer = ModelTrainer()
-
     train_data_path, test_data_path = data_ingestor.initiate_data_ingestion()
+
+    data_transformer = DataTransformation()
     X_train, y_train, X_test, y_test, preprocessor_path = data_transformer.initiate_data_transformation(train_data_path, test_data_path)
 
     # print(X_train)
@@ -152,6 +175,7 @@ if __name__ == "__main__":
     # print(y_test)
     # print(preprocessor_path)
 
+    model_trainer = ModelTrainer()
     best_score = model_trainer.initiate_model_trainer(X_train, y_train, X_test, y_test)
 
-    # print(best_score)
+    print(best_score)

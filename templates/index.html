@@ -8,7 +8,7 @@
 <body>
     <div class="login">
         <h1>Titanic Survival Predictor</h1>
-        <form action="{{ url_for('prediction') }}" method="post">
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
             <legend>Enter required data to generate a likelyhood of survival</legend>
             <div class="mb-3">
                 <label class="form-label">Age</label>

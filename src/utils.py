@@ -9,6 +9,8 @@ from sklearn.model_selection import RandomizedSearchCV
 from sklearn.metrics import f1_score, make_scorer
 from src.exception import CustomException
 
+warnings.filterwarnings('ignore')
+
 
 def save_object(file_path, obj):
     """
@@ -73,39 +75,35 @@ def optimise_models(models: dict, params: dict, X_train, y_train, X_test=None, y
         print(f"{model_name}:")
         
         f1_scorer = make_scorer(f1_score, average='weighted')  # Use weighted F1 score for multi-class classification with imbalanced class distribution
-
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore", UserWarning)
-            warnings.simplefilter("ignore", ConvergenceWarning)
         
-            # Setup GridSearchCV for current model
-            tuned_model = GridSearchCV(
-                model,
-                param_grid=params[model_name],
-                cv=5,
-                scoring=f1_scorer,
-                verbose=True,
-                n_jobs=-1
-            )
-            
-            # Fit data
-            tuned_model.fit(X_train, y_train)
+        # Setup GridSearchCV for current model
+        tuned_model = GridSearchCV(
+            model,
+            param_grid=params[model_name],
+            cv=5,
+            scoring=f1_scorer,
+            verbose=True,
+            n_jobs=-1
+        )
+        
+        # Fit data
+        tuned_model.fit(X_train, y_train)
 
-            # Save best models and best scores
-            best_tuned_model = tuned_model.best_estimator_
-            tuned_models[model_name] = [best_tuned_model, tuned_model.best_score_]
+        # Save best models and best scores
+        best_tuned_model = tuned_model.best_estimator_
+        tuned_models[model_name] = [best_tuned_model, tuned_model.best_score_]
 
-            # Report model scores and best parameters
-            print('- Best Parameters: ' + str(tuned_model.best_params_))
-            print('- Best F1 Score Train: ' + str(round(tuned_model.best_score_ * 100, 1)) + '%')
+        # Report model scores and best parameters
+        print('- Best Parameters: ' + str(tuned_model.best_params_))
+        print('- Best F1 Score Train: ' + str(round(tuned_model.best_score_ * 100, 1)) + '%')
 
-            # Calculate F1 score on test set if available
-            if X_test is not None and y_test is not None:
-                y_pred_test = best_tuned_model.predict(X_test)
-                f1_test_score = f1_score(y_test, y_pred_test, average='weighted')
-                print('- Best F1 Score Test: ' + str(round(f1_test_score * 100, 1)) + '%')
-                tuned_models[model_name][1] = f1_test_score
-            print()
+        # Calculate F1 score on test set if available
+        if X_test is not None and y_test is not None:
+            y_pred_test = best_tuned_model.predict(X_test)
+            f1_test_score = f1_score(y_test, y_pred_test, average='weighted')
+            print('- Best F1 Score Test: ' + str(round(f1_test_score * 100, 1)) + '%')
+            tuned_models[model_name][1] = f1_test_score
+        print()
 
     # Return sorted dictionary of model names, models and scores
     sorted_tuned_models = dict(sorted(tuned_models.items(), key=lambda item: -item[1][1]))

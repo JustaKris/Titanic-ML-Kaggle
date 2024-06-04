@@ -1,6 +1,7 @@
 import os
 import sys
 import itertools
+import warnings
 import numpy as np
 from dataclasses import dataclass
 
@@ -18,6 +19,8 @@ from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object, optimise_models
 
+warnings.filterwarnings('ignore')
+
 
 @dataclass
 class ModelTrainerConfig:
@@ -31,12 +34,12 @@ class ModelTrainer:
         try:
             # Dictionary of model to evaluate
             models = {
-                # 'Logistic Regression': LogisticRegression(max_iter=2000),
+                # 'Logistic Regression': LogisticRegression(max_iter=2000),  # performs ok but keeps throwing warnings that I can't seem to get rid of
                 'Random Forest Classifier': RandomForestClassifier(random_state=1),
                 'KNeighbors Classifier': KNeighborsClassifier(),
-                'SVC': SVC(probability=True),
+                # 'SVC': SVC(probability=True),
                 'XGB Classifier': XGBClassifier(random_state=1),
-                # 'CatBoost Classifier': CatBoostClassifier(silent=True)
+                'CatBoost Classifier': CatBoostClassifier(silent=True)
             }
 
             # Hyperparameter dictionary for each model
