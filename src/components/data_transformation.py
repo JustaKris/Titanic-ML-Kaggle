@@ -18,7 +18,6 @@ from src.components.model_trainer import ModelTrainer
 
 warnings.filterwarnings('ignore')
 
-
 TARGET = "Survived"
 
 @dataclass
@@ -83,7 +82,7 @@ class DataTransformation:
         df.dropna(subset=['Embarked'], inplace=True)
 
         # Dropping unwanted columns
-        columns_to_drop = [
+        df.drop(columns=[
             "PassengerId",  # Just a unique identifier for each record
             "Name",  # Person's name will have no relevance
             "Ticket",  # Just ticket ids
@@ -95,18 +94,13 @@ class DataTransformation:
             # "cabin_multiple",
             # "Embarked", 
             # "name_title"
-        ]
-        df.drop(columns=columns_to_drop, inplace=True)
+        ], inplace=True)
 
+        # Finalized column lists
         cols = df.columns
         num_cols = list(df.select_dtypes('number'))
         cat_cols = list(set(cols) - set(num_cols))
         num_cols.remove(TARGET)
-
-        # print(num_cols)
-        # print(cat_cols)
-
-        # exit()
 
         return df, num_cols, cat_cols
 
@@ -128,12 +122,6 @@ class DataTransformation:
             # Saving mode values of each column for later use
             train_df.to_csv(os.path.join('artifacts', 'train_augmented.csv'), index=False, header=True)
             test_df.to_csv(os.path.join('artifacts', 'test_augmented.csv'), index=False, header=True)
-
-            # Column lists for each preprocessor pipeline
-            # numerical_columns = ["Age", "SibSp", "Parch", "norm_fare", "cabin_multiple"]
-            # categorical_columns = ["Pclass", "Sex", "Embarked", "name_title"]
-            # numerical_columns = ["Age"]
-            # categorical_columns = ["Pclass", "Sex"]
 
             # Preprocessing
             preprocessor = self._create_column_transformer(numerical_columns, categorical_columns)

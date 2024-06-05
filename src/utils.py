@@ -11,7 +11,6 @@ from src.exception import CustomException
 
 warnings.filterwarnings('ignore')
 
-
 def save_object(file_path, obj):
     """
     Saves a given object to a specified file path.
