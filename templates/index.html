@@ -8,16 +8,20 @@
 <body>
     <div class="login">
         <h1>Titanic Survival Predictor</h1>
+        <p>
+            <button class="link-button" onclick="window.open('https://github.com/JustaKris/Titanic-ML-Kaggle', '_blank')">Project Repository</button> |
+            <button class="link-button" onclick="window.open('https://github.com/JustaKris/Titanic-ML-Kaggle/blob/main/notebook/Titanic-Machine-Learning-from-Disaster.ipynb', '_blank')">Research Notebook</button>
+        </p>
         <form action="{{ url_for('predict_datapoint') }}" method="post">
-            <legend>Enter required data to generate a likelyhood of survival</legend>
+            <legend>Enter required data below to generate survival prediction</legend>
             <div class="mb-3">
                 <label class="form-label">Age</label>
-                <input class="form-control" type="number" name="age" placeholder="Enter age" min="0" max="100" required />
+                <input class="form-control" type="number" name="age" placeholder="Enter Age" min="0" max="100" required />
             </div>
             <div class="mb-3">
                 <label class="form-label">Gender</label>
                 <select class="form-control" name="gender" required onclick="removePlaceholderOption(this)">
-                    <option class="placeholder" selected disabled value="">Select gender</option>
+                    <option class="placeholder" selected disabled value="">Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
@@ -25,15 +29,15 @@
             <div class="mb-3">
                 <label class="form-label">Title</label>
                 <select class="form-control" name="name_title" required>
-                    <option class="placeholder" selected disabled value="">Select title</option>
-                    <option value="Mr">Mr</option>
+                    <option class="placeholder" selected disabled value="">Select Title</option>
+                    <option value="Mr">Mister</option>
                     <option value="Miss">Miss</option>
                     <option value="Mrs">Mrs</option>
                     <option value="Master">Master</option>
-                    <option value="Dr">Dr</option>
-                    <option value="Rev">Rev</option>
+                    <option value="Dr">Doctor</option>
+                    <option value="Rev">Reverand</option>
                     <option value="Major">Major</option>
-                    <option value="Col">Col</option>
+                    <option value="Col">Colonel</option>
                     <option value="The Countess">The Countess</option>
                     <option value="Ms">Ms</option>
                     <option value="Sir">Sir</option>
@@ -42,7 +46,7 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label class="form-label">Traveling with siblings and/or spouse?</label>
+                <label class="form-label">Traveling with siblings and/or spouses?</label>
                 <select class="form-control" name="sibsp" required>
                     <option class="placeholder" selected disabled value="">Select Option</option>
                     <option value="0">None</option>
@@ -51,15 +55,18 @@
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
+                    <option value="5">6</option>
+                    <option value="5">7</option>
+                    <option value="5">8</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label class="form-label">Ticket Class</label>
                 <select class="form-control" name="pclass" required>
-                    <option class="placeholder" selected disabled value="">Select ticket class</option>
-                    <option value="1">First</option>
-                    <option value="2">Second</option>
-                    <option value="3">Third</option>
+                    <option class="placeholder" selected disabled value="">Select Ticket Class</option>
+                    <option value="1">1st</option>
+                    <option value="2">2nd</option>
+                    <option value="3">3rd</option>
                 </select>
             </div>
             <div class="mb-3">
@@ -72,14 +79,13 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label class="form-label">Cabin size</label>
+                <label class="form-label">Cabin Size</label>
                 <select class="form-control" name="cabin_multiple" required>
-                    <option class="placeholder" selected disabled value="">Enter cabin size</option>
-                    <option value="0">1 person cabin</option>
-                    <option value="1">2 person cabin</option>
-                    <option value="2">3 person cabin</option>
-                    <option value="3">4 person cabin</option>
-                    <option value="4">5 person cabin</option>
+                    <option class="placeholder" selected disabled value="">Enter Cabin Size</option>
+                    <option value="0">Single</option>
+                    <option value="1">Double</option>
+                    <option value="2">Three Person</option>
+                    <option value="3">Four Person</option>
                 </select>
             </div>
             <div class="mb-3">
