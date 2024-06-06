@@ -13,8 +13,6 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object
-from src.components.data_ingestion import DataIngestion
-from src.components.model_trainer import ModelTrainer
 
 warnings.filterwarnings('ignore')
 
@@ -151,6 +149,9 @@ class DataTransformation:
 
 
 if __name__ == "__main__":
+    from src.components.data_ingestion import DataIngestion
+    from src.components.model_trainer import ModelTrainer
+    
     data_ingestor = DataIngestion()
     train_data_path, test_data_path = data_ingestor.initiate_data_ingestion()
 

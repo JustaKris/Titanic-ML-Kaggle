@@ -3,9 +3,7 @@ import sys
 import dill
 import warnings
 import logging
-from sklearn.exceptions import ConvergenceWarning
-from sklearn.model_selection import GridSearchCV 
-from sklearn.model_selection import RandomizedSearchCV 
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from sklearn.metrics import f1_score, make_scorer
 from src.exception import CustomException
 
